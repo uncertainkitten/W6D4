@@ -87,6 +87,20 @@ class DOMNodeCollection {
     this.htmlElements = [];
   }
 
+  on(type, listener) {
+    this.htmlElements.forEach( (el) => {
+      el.addEventListener(type, listener);
+    });
+    this.attr("data-event", listener);
+  }
+
+  off(type) {
+    const func = this.attr("data-event")[0];
+    this.htmlElements.forEach( (el) => {
+      el.removeEventListener(type, func);
+    });
+  }
+
 }
 
 
